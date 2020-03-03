@@ -88,7 +88,8 @@ void RemoteServer::TCPRead(){
             this->CloseSocket();
             return;
         }
-        std::string SerializedData[i](Buffer);
+        std::string temp(Buffer);
+        SerializedData[i] = temp;
         
     }
 
