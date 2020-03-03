@@ -90,7 +90,7 @@ void RemoteServer::TCPRead(){
         }
         std::string temp(Buffer);
         std::cout << "Reading in " << temp << std::endl;
-        SerializedData[i] = temp;
+        this->SerializedData[i] = temp;
         
     }
 
@@ -103,8 +103,8 @@ void RemoteServer::TCPWrite(){
         for (int j = 0; j < this->n; j++){
             int Result;
             if(i != j){
-                std::cout <<"Writing " SerializedData[j].c_str() << " to " << this->i+1 << std::endl;
-                Result = write(this->SocketFileDescriptors[i], SerializedData[j].c_str(), SerializedData[j].size());
+                std::cout <<"Writing " <<  SerializedData[j].c_str() << " to " << i+1 << std::endl;
+                Result = write(this->SocketFileDescriptors[i], this->SerializedData[j].c_str(), this->SerializedData[j].size());
                 if (Result < 0) {
                     perror("Error on Writing");
                 }
