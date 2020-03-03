@@ -73,10 +73,12 @@ void RemoteServer::ServerSetup(int portnumber){
 }
 
 void RemoteServer::TCPRead(){
+    std::cout << "Entering Read" << std::endl;
 
     char Buffer[PACKET_SIZE_MAX];
     int Results;
     for(int i = 0; i < this->n; i++){
+        std::cout << "Reading" << std::endl;
         Results = read(this->SocketFileDescriptors[i], Buffer, PACKET_SIZE_MAX -1);
         if(Results < 1){
             perror("Error Reading from Socket");
@@ -95,6 +97,7 @@ void RemoteServer::TCPRead(){
       //  std::cout << this->SerializedData[i] << std::endl;
         bzero(Buffer, PACKET_SIZE_MAX);
     }
+    std::cout << "Exiting read" << std::endl;
     return;
 }
 
