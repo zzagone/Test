@@ -109,6 +109,7 @@ void RemoteServer::TCPWrite(){
         for(int j = 0; j < this->n; j++){
             if (i != j){
                 Result = write(this->SocketFileDescriptors[i], NewSerializedData[j].c_str(), NewSerializedData[j].size());
+                std::cout << "Writing " << NewSerializedData[j].c_str() << std::endl;
                 if (Result < 0){
                     perror("Error Writing to Socket");
                 }
