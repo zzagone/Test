@@ -73,63 +73,48 @@ void RemoteServer::ServerSetup(int portnumber){
 }
 
 void RemoteServer::TCPRead(){
-    std::cout << "Entering Read" << std::endl;
-
-    char Buffer[PACKET_SIZE_MAX];
-    int Results;
+    
+    
+   
     for(int i = 0; i < this->n; i++){
-        std::cout << "Reading" << std::endl;
-        Results = read(this->SocketFileDescriptors[i], Buffer, PACKET_SIZE_MAX -1);
-        if(Results < 1){
-            perror("Error Reading from Socket");
+        int Results;
+        char Buffer[PACKET_SIZE_MAX];
+        Results = read(this->SocketFileDescriptors[i], Buffer, PACKET_SIZE_MAX-1);
+        if (Results < 1){
+            perror("Error Reading From Socket");
             return;
-        } else if(Results == 0){
-            perror("Closing sockets");
+        }else if(Results == 0){
+            perror ("Closing sockets");
             this->CloseSocket();
             return;
         }
-      //  std::string test(Buffer);
-        //std::cout << test;
-        std::string FullSerialized(Buffer);
-        std::cout << FullSerialized.substr(0,3) << std::endl;
-       // int NumberBytesInPacket = std::stoi(FullSerialized.substr(0,3));
-       // this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket);
-        this->SerializedData[i] = FullSerialized;                                              //CHANGE BACK TO FULL SERIALIZED FROM TEST
-        std::cout << this->SerializedData[i] << std::endl;
-        bzero(Buffer, PACKET_SIZE_MAX);
+        std::string SerializedData[i](Buffer);
+        
     }
-    std::cout << "Exiting read" << std::endl;
-    return;
+
+
 }
 
 void RemoteServer::TCPWrite(){
-    int Result;
-    char Prepend[4];
-    std::string NewSerializedData[6];
-    //std::cout << "Test 1 n: " << this->n << std::endl;
-  //  for(int i = 0; i < this->n; i++){
-    //    sprintf(Prepend, "%03d|", this->SerializedData[i].size());
-      //  std::string NewSerialized(Prepend);
-        
-        //NewSerialized.append(this->SerializedData[i]);
-        //NewSerializedData[i] = NewSerialized;
-   //}
 
     for(int i = 0; i < this->n; i++){
-        for(int j = 0; j < this->n; j++){
-            if (i != j){
-                Result = write(this->SocketFileDescriptors[i], NewSerializedData[j].c_str(), NewSerializedData[j].size()); //CHANGE BACK SERIALIZED DATA TO NEW SERIALIZED
-                std::cout << "Writing " << NewSerializedData[j].c_str() << std::endl;
-                NewSerializedData[i] = "";
-                if (Result < 0){
-                    perror("Error Writing to Socket");
+        for (int j = 0; j < this->n; j++){
+            int Result;
+            if(i != j){
+                Result = write(this->SocketFileDescriptors[i], SerializedData[j].c_str, SerializedData[j].size());
+                if (Result < 0) {
+                    perror("Error on Writing");
                 }
             }
         }
-
     }
     
+    
 }
+
+
+
+
 void RemoteServer::CloseSocket(){
     for(int i = 0; i < n; i++){
         close(this->SocketFileDescriptors[i]);
