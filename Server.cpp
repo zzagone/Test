@@ -90,10 +90,11 @@ void RemoteServer::TCPRead(){
         }
         std::string test(Buffer);
         std::cout << test;
-       // std::string FullSerialized(Buffer);
+        std::string FullSerialized(Buffer);
         //std::cout << "String substring" << FullSerialized.substr(0,3) << std::endl;
        // int NumberBytesInPacket = std::stoi(FullSerialized.substr(0,3));
-      //  this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket);
+       //this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket)
+       this->SerializedData[i] = FullSerialized;
       //  std::cout << this->SerializedData[i] << std::endl;
         bzero(Buffer, PACKET_SIZE_MAX);
     }
@@ -103,15 +104,15 @@ void RemoteServer::TCPRead(){
 
 void RemoteServer::TCPWrite(){
     int Result;
-    char Prepend[4];
+   // char Prepend[4];
     std::string NewSerializedData[6];
-    std::cout << "Test 1 n: " << this->n << std::endl;
+    //std::cout << "Test 1 n: " << this->n << std::endl;
     for(int i = 0; i < this->n; i++){
-        sprintf(Prepend, "%03d|", this->SerializedData[i].size());
-        std::string NewSerialized(Prepend);
+      //  sprintf(Prepend, "%03d|", this->SerializedData[i].size());
+        //std::string NewSerialized(Prepend);
         NewSerialized.append(this->SerializedData[i]);
-        NewSerializedData[i] = NewSerialized;
-    }
+        //NewSerializedData[i] = NewSerialized;
+   // }
 
     for(int i = 0; i < this->n; i++){
         for(int j = 0; j < this->n; j++){
