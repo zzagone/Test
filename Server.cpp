@@ -91,7 +91,7 @@ void RemoteServer::TCPRead(){
         std::string temp(Buffer);
         int NumberBytesInPacket = std::stoi(temp.substr(0,3));
         std::cout << "Reading in " << temp.substr(0,NumberBytesInPacket) << std::endl;
-        this->SerializedData[i] = temp.substr(0,NumberBytesInPacket);
+        this->SerializedData[i] =temp.substr(0,3) + temp.substr(4,NumberBytesInPacket);
         
     }
 
