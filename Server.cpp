@@ -107,19 +107,22 @@ void RemoteServer::TCPWrite(){
     char Prepend[4];
     std::string NewSerializedData[6];
     //std::cout << "Test 1 n: " << this->n << std::endl;
-    for(int i = 0; i < this->n; i++){
-        sprintf(Prepend, "%03d|", this->SerializedData[i].size());
-        std::string NewSerialized(Prepend);
+  //  for(int i = 0; i < this->n; i++){
+    //    sprintf(Prepend, "%03d|", this->SerializedData[i].size());
+      //  std::string NewSerialized(Prepend);
         
-        NewSerialized.append(this->SerializedData[i]);
-        NewSerializedData[i] = NewSerialized;
-   }
+        //NewSerialized.append(this->SerializedData[i]);
+        //NewSerializedData[i] = NewSerialized;
+   //}
 
     for(int i = 0; i < this->n; i++){
         for(int j = 0; j < this->n; j++){
             if (i != j){
+                sprintf(Prepend, "%03d|", this->SerializedData[i].size());
+                NewSerializedData[i] = Prepend.append(SerializedData[i]);
                 Result = write(this->SocketFileDescriptors[i], NewSerializedData[j].c_str(), NewSerializedData[j].size()); //CHANGE BACK SERIALIZED DATA TO NEW SERIALIZED
                 std::cout << "Writing " << NewSerializedData[j].c_str() << std::endl;
+                NewSerializedData[i] = "";
                 if (Result < 0){
                     perror("Error Writing to Socket");
                 }
