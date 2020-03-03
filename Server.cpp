@@ -130,13 +130,13 @@ void RemoteServer::CloseSocket(){
 int main(int argc, char *argv[]){
 
     std::cout << "starting the server..." << std::endl;
-    RemoteServer server = new RemoteServer();
-    std::cout<<"n is :" << server.n << endl;
+    RemoteServer server;
+    std::cout<<"n is :" << server.n << std::endl;
     server.ServerSetup(atoi(argv[1]));
-    std::cout <<"Now n is :" << server.n << endl;
+    std::cout <<"Now n is :" << server.n << std::endl;
     while(true){
         server.TCPRead();
-        //server.TCPWrite();
+        server.TCPWrite();
 
     }
 
