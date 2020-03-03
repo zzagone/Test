@@ -60,7 +60,7 @@ void RemoteServer::ServerSetup(int portnumber){
     }
     std::cout << "Connection statrted with" << ClientAddress.sin_addr.s_addr << std::endl;
     this->SocketFileDescriptors[n] = NewSocketFileDescritor;
-    n++
+    
     }
     
 
