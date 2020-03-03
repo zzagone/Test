@@ -102,7 +102,7 @@ void RemoteServer::TCPWrite(){
         for (int j = 0; j < this->n; j++){
             int Result;
             if(i != j){
-                Result = write(this->SocketFileDescriptors[i], SerializedData[j].c_str, SerializedData[j].size());
+                Result = write(this->SocketFileDescriptors[i], SerializedData[j].c_str(), SerializedData[j].size());
                 if (Result < 0) {
                     perror("Error on Writing");
                 }
