@@ -27,7 +27,7 @@ class RemoteServer{
 };
 
 RemoteServer::RemoteServer(){
-    n = 0;
+    this->n = 0;
 }
 
 void RemoteServer::ServerSetup(int portnumber){
