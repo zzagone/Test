@@ -136,7 +136,7 @@ int main(int argc, char *argv[]){
     std::cout <<"Now n is :" << server.n << endl;
     while(true){
         server.TCPRead();
-        server.TCPWrite();
+        //server.TCPWrite();
 
     }
 
