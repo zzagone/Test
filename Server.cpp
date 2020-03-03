@@ -130,6 +130,7 @@ void RemoteServer::CloseSocket(){
 
 int main(int argc, char *argv[]){
 
+    std::cout << "starting the server..." << std::endl;
     RemoteServer server;
     std::cout<<"n is :" << server.n << endl;
     server.ServerSetup(atoi(argv[1]));
