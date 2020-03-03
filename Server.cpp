@@ -97,7 +97,7 @@ void RemoteServer::TCPWrite(){
     int Result;
     char Prepend[4];
     std::string NewSerializedData[6];
-
+    std::cout << "Test 1 n: " << n << std::endl;
     for(int i = 0; i < n; i++){
         sprintf(Prepend, "%03d|", this->SerializedData[i].size());
         std::string NewSerialized(Prepend);
