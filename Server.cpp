@@ -113,7 +113,7 @@ void RemoteServer::TCPWrite(){
         std::string NewSerialized;
         NewSerialized.append(this->SerializedData[i]);
         //NewSerializedData[i] = NewSerialized;
-   // }
+   }
 
     for(int i = 0; i < this->n; i++){
         for(int j = 0; j < this->n; j++){
