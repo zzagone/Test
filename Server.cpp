@@ -98,8 +98,8 @@ void RemoteServer::TCPWrite(){
     int Result;
     char Prepend[4];
     std::string NewSerializedData[6];
-    std::cout << "Test 1 n: " << n << std::endl;
-    for(int i = 0; i < n; i++){
+    std::cout << "Test 1 n: " << this->n << std::endl;
+    for(int i = 0; i < this->n; i++){
         sprintf(Prepend, "%03d|", this->SerializedData[i].size());
         std::string NewSerialized(Prepend);
         NewSerialized.append(this->SerializedData[i]);
@@ -131,8 +131,9 @@ void RemoteServer::CloseSocket(){
 int main(int argc, char *argv[]){
 
     RemoteServer server;
+    std::cout<<"n is :" << server.n << endl;
     server.ServerSetup(atoi(argv[1]));
-
+    std::cout <<"Now n is :" << server.n << endl;
     while(true){
         server.TCPRead();
         server.TCPWrite();
