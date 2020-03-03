@@ -90,11 +90,11 @@ void RemoteServer::TCPRead(){
         }
         std::string test(Buffer);
         std::cout << test;
-        std::string FullSerialized(Buffer);
+        //std::string FullSerialized(Buffer);
         //std::cout << "String substring" << FullSerialized.substr(0,3) << std::endl;
        // int NumberBytesInPacket = std::stoi(FullSerialized.substr(0,3));
        //this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket)
-       this->SerializedData[i] = FullSerialized;
+       this->SerializedData[i] = test;                                              //CHANGE BACK TO FULL SERIALIZED FROM TEST
       //  std::cout << this->SerializedData[i] << std::endl;
         bzero(Buffer, PACKET_SIZE_MAX);
     }
@@ -107,19 +107,19 @@ void RemoteServer::TCPWrite(){
    // char Prepend[4];
     std::string NewSerializedData[6];
     //std::cout << "Test 1 n: " << this->n << std::endl;
-    for(int i = 0; i < this->n; i++){
+    //for(int i = 0; i < this->n; i++){
       //  sprintf(Prepend, "%03d|", this->SerializedData[i].size());
         //std::string NewSerialized(Prepend);
-        std::string NewSerialized;
-        NewSerialized.append(this->SerializedData[i]);
+        //std::string NewSerialized;
+       // NewSerialized.append(this->SerializedData[i]);
         //NewSerializedData[i] = NewSerialized;
-   }
+  // }
 
     for(int i = 0; i < this->n; i++){
         for(int j = 0; j < this->n; j++){
             if (i != j){
-                Result = write(this->SocketFileDescriptors[i], NewSerializedData[j].c_str(), NewSerializedData[j].size());
-                std::cout << "Writing " << NewSerializedData[j].c_str() << std::endl;
+                Result = write(this->SocketFileDescriptors[i], SerializedData[j].c_str(), SerializedData[j].size()); //CHANGE BACK SERIALIZED DATA TO NEW SERIALIZED
+                std::cout << "Writing " << SerializedData[j].c_str() << std::endl;
                 if (Result < 0){
                     perror("Error Writing to Socket");
                 }
