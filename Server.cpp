@@ -91,10 +91,10 @@ void RemoteServer::TCPRead(){
       //  std::string test(Buffer);
         //std::cout << test;
         std::string FullSerialized(Buffer);
-        std::cout << "String substring" << FullSerialized.substr(0,3) << std::endl;
-        int NumberBytesInPacket = std::stoi(FullSerialized.substr(0,3));
-        this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket);
-        this->SerializedData[i] = FullSerialized;                                              //CHANGE BACK TO FULL SERIALIZED FROM TEST
+        //std::cout << "String substring" << FullSerialized.substr(0,3) << std::endl;
+       // int NumberBytesInPacket = std::stoi(FullSerialized.substr(0,3));
+       // this->SerializedData[i] = FullSerialized.substr(4, NumberBytesInPacket);
+        //this->SerializedData[i] = FullSerialized;                                              //CHANGE BACK TO FULL SERIALIZED FROM TEST
         std::cout << this->SerializedData[i] << std::endl;
         bzero(Buffer, PACKET_SIZE_MAX);
     }
@@ -118,8 +118,6 @@ void RemoteServer::TCPWrite(){
     for(int i = 0; i < this->n; i++){
         for(int j = 0; j < this->n; j++){
             if (i != j){
-                sprintf(Prepend, "%03d|", this->SerializedData[i].size());
-                NewSerializedData[i] = Prepend.append(SerializedData[i]);
                 Result = write(this->SocketFileDescriptors[i], NewSerializedData[j].c_str(), NewSerializedData[j].size()); //CHANGE BACK SERIALIZED DATA TO NEW SERIALIZED
                 std::cout << "Writing " << NewSerializedData[j].c_str() << std::endl;
                 NewSerializedData[i] = "";
