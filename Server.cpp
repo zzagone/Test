@@ -50,7 +50,7 @@ void RemoteServer::ServerSetup(int portnumber){
     if(0 > bind(SocketFileDescriptor, (struct sockaddr *)&ServerAddress, sizeof(ServerAddress))){
         perror("Error binding");
     }
-    while(this->n < 2){
+    
     listen(SocketFileDescriptor, 5);
     ClientLength = sizeof(ClientAddress);
 
@@ -60,9 +60,7 @@ void RemoteServer::ServerSetup(int portnumber){
     }
     std::cout << "Connection statrted with" << ClientAddress.sin_addr.s_addr << std::endl;
     this->SocketFileDescriptors[n] = NewSocketFileDescritor;
-    
     }
-    
 
     return;
 
