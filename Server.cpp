@@ -50,7 +50,7 @@ void RemoteServer::ServerSetup(int portnumber){
     if(0 > bind(SocketFileDescriptor, (struct sockaddr *)&ServerAddress, sizeof(ServerAddress))){
         perror("Error binding");
     }
-    while(n < 2){
+    while(this->n < 2){
     listen(SocketFileDescriptor, 5);
     ClientLength = sizeof(ClientAddress);
 
@@ -131,7 +131,7 @@ void RemoteServer::CloseSocket(){
 int main(int argc, char *argv[]){
 
     std::cout << "starting the server..." << std::endl;
-    RemoteServer server;
+    RemoteServer server = new RemoteServer();
     std::cout<<"n is :" << server.n << endl;
     server.ServerSetup(atoi(argv[1]));
     std::cout <<"Now n is :" << server.n << endl;
