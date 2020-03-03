@@ -89,7 +89,7 @@ void RemoteServer::TCPRead(){
             return;
         }
         std::string temp(Buffer);
-        std::cout << "Reading in " << temp << std::endl;
+        std::cout << "Reading in " << Buffer<< std::endl;
         this->SerializedData[i] = temp;
         
     }
