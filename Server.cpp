@@ -76,7 +76,7 @@ void RemoteServer::TCPRead(){
 
     char Buffer[PACKET_SIZE_MAX];
     int Results;
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < this->n; i++){
         Results = read(this->SocketFileDescriptors[i], Buffer, PACKET_SIZE_MAX -1);
         if(Results < 1){
             perror("Error Reading from Socket");
